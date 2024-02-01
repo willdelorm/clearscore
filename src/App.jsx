@@ -1,6 +1,5 @@
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+import { nanoid } from "nanoid";
 import "./App.css";
 import Nav from "./components/Nav/Nav";
 import NewIdea from "./components/NewIdea/NewIdea";
@@ -37,12 +36,24 @@ function App() {
     ? ideas.map((data) => <Tile key={data.id} data={data} />)
     : "No ideas yet...";
 
+  const handleAddIdea = (data) => {
+    const { title, desc } = data;
+    const newIdea = {
+      id: nanoid(),
+      title,
+      desc,
+      created: new Date(),
+      updated: null,
+    };
+    setIdeas([...ideas, newIdea]);
+  };
+
   return (
     <div id="app">
       <Nav />
       <main id="main">
         <div className="new-container">
-          <NewIdea />
+          <NewIdea handleSubmit={handleAddIdea} />
         </div>
         <div className="list-container">{viewIdeas}</div>
       </main>

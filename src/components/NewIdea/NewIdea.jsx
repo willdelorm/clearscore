@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import "./NewIdea.css";
 
-const NewIdea = () => {
+const INITIAL_FORM_DATA = {
+  title: "",
+  desc: "",
+};
+
+const NewIdea = ({ handleSubmit }) => {
+  const [formData, setFormData] = useState(INITIAL_FORM_DATA);
+
   return (
-    <form id="new-form">
+    <div id="new-form">
       <div className="input-container">
         <label className="input-label" htmlFor="title">
           Title
@@ -13,6 +20,8 @@ const NewIdea = () => {
           type="text"
           name="title"
           id="title-text"
+          value={formData.title}
+          onChange={(e) => setFormData({ ...formData, title: e.target.value })}
           placeholder="Enter your title"
         />
       </div>
@@ -26,13 +35,19 @@ const NewIdea = () => {
           id="desc"
           cols="30"
           rows="10"
+          value={formData.desc}
+          onChange={(e) => setFormData({ ...formData, desc: e.target.value })}
           placeholder="Enter your description"
         ></textarea>
       </div>
-      <button id="submit" className="btn" type="submit">
+      <button
+        id="submit"
+        className="btn"
+        onClick={() => handleSubmit(formData)}
+      >
         Create Idea
       </button>
-    </form>
+    </div>
   );
 };
 
