@@ -1,0 +1,43 @@
+/* index.css mainly used for browser-styling reset */
+@import "/node_modules/modern-normalize/modern-normalize.css";
+
+:root {
+  line-height: 1.5;
+}
+
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+figure,
+p,
+ol,
+ul {
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+img {
+  display: block;
+  max-inline-size: 100%;
+}
+
+ol,
+ul {
+  list-style: none;
+  padding-inline: 0;
+}

@@ -1,0 +1,22 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat");
+
+#app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100vw;
+  background-color: #233143;
+  font-family: Montserrat, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+#main {
+  flex-grow: 1;
+  display: flex;
+}
+
+.list-container {
+  flex-grow: 1;
+  background-color: #ffffff;
+}
