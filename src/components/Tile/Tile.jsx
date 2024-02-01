@@ -1,8 +1,8 @@
 import React from "react";
 import "./Tile.css";
 
-const Tile = ({ data }) => {
-  const { title, desc, created, updated } = data;
+const Tile = ({ data, handleDelete }) => {
+  const { id, title, desc, created, updated } = data;
 
   const displayDate = (updated ? updated : created).toLocaleTimeString();
 
@@ -16,7 +16,7 @@ const Tile = ({ data }) => {
           {displayDate}
         </p>
       </div>
-      <div className="btn-delete">
+      <div className="btn-delete" onClick={() => handleDelete(id)}>
         <i className="fa-solid fa-trash"></i>
       </div>
     </div>

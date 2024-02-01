@@ -32,10 +32,6 @@ const INITIAL_DATA = [
 function App() {
   const [ideas, setIdeas] = useState(INITIAL_DATA);
 
-  const viewIdeas = ideas.length
-    ? ideas.map((data) => <Tile key={data.id} data={data} />)
-    : "No ideas yet...";
-
   const handleAddIdea = (data) => {
     const { title, desc } = data;
     const newIdea = {
@@ -47,6 +43,17 @@ function App() {
     };
     setIdeas([...ideas, newIdea]);
   };
+
+  const handleDeleteIdea = (id) => {
+    const filteredIdeas = ideas.filter((idea) => idea.id !== id);
+    setIdeas(filteredIdeas);
+  };
+
+  const viewIdeas = ideas.length
+    ? ideas.map((data) => (
+        <Tile key={data.id} data={data} handleDelete={handleDeleteIdea} />
+      ))
+    : "No ideas yet...";
 
   return (
     <div id="app">
