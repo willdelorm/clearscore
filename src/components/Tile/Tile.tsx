@@ -15,7 +15,9 @@ const Tile = ({
   const [editKey, setEditKey] = useState("");
   const [editValue, setEditValue] = useState("");
 
-  const displayDate = (updated ? updated : created).toLocaleTimeString();
+  const displayDate =
+    (updated > created ? "Updated on " : "Created on ") +
+    updated.toLocaleTimeString();
 
   const handleChange = (e: React.FormEvent<HTMLInputElement>) =>
     setEditValue(e.currentTarget.value);

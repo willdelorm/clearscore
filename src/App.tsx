@@ -40,12 +40,14 @@ function App() {
 
   const handleAddIdea = (data: Idea) => {
     const { title, desc } = data;
+    const now = new Date();
+
     const newIdea = {
       id: nanoid(),
       title,
       desc,
-      created: new Date(),
-      updated: new Date(),
+      created: now,
+      updated: now,
     };
     setIdeas([...ideas, newIdea]);
   };
@@ -62,6 +64,7 @@ function App() {
         } else {
           idea[field] = value as string;
         }
+        idea.updated = new Date();
       }
       return idea;
     });
