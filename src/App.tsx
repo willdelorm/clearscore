@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { nanoid } from "nanoid";
+import { Idea } from "./types/types";
 import "./App.css";
+
 import Nav from "./components/Nav/Nav";
 import NewIdea from "./components/NewIdea/NewIdea";
 import Tile from "./components/Tile/Tile";
-
-import { Idea } from "./types/types";
 
 const INITIAL_DATA: Array<Idea> = [
   {
@@ -36,7 +36,6 @@ function App() {
 
   useEffect(() => {
     setIdeas(INITIAL_DATA);
-
   }, []);
 
   const handleAddIdea = (data: Idea) => {
