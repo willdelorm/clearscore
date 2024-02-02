@@ -57,5 +57,5 @@ Based on the company's website design, this ideas board will be visually minimal
 ### Technologies to be used
 
 - Latest ECMAScript standards
-- React + Vite to create an SPA
+- React (TypeScript) + Vite
 - Jest for unit testing

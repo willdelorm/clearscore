@@ -1,7 +1,7 @@
-import React from "react";
 import "./Tile.css";
+import { Idea } from "../../types/types";
 
-const Tile = ({ data, handleDelete }) => {
+const Tile = ({ data, handleDelete }: {data:Idea, handleDelete: Function}) => {
   const { id, title, desc, created, updated } = data;
 
   const displayDate = (updated ? updated : created).toLocaleTimeString();

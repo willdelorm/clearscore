@@ -1,27 +1,29 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { nanoid } from "nanoid";
 import "./App.css";
 import Nav from "./components/Nav/Nav";
 import NewIdea from "./components/NewIdea/NewIdea";
 import Tile from "./components/Tile/Tile";
 
-const INITIAL_DATA = [
+import { Idea } from "./types/types";
+
+const INITIAL_DATA: Array<Idea> = [
   {
-    id: 1,
+    id: nanoid(),
     title: "Idea 1",
     desc: "This is such a great idea",
     created: new Date(),
     updated: null,
   },
   {
-    id: 2,
+    id: nanoid(),
     title: "Idea 2",
     desc: "This is such a terrible idea",
     created: new Date(),
     updated: null,
   },
   {
-    id: 3,
+    id: nanoid(),
     title: "Idea 3",
     desc: "This idea could go places",
     created: new Date(),
@@ -30,9 +32,14 @@ const INITIAL_DATA = [
 ];
 
 function App() {
-  const [ideas, setIdeas] = useState(INITIAL_DATA);
+  const [ideas, setIdeas] = useState(Array<Idea>);
 
-  const handleAddIdea = (data) => {
+  useEffect(() => {
+    setIdeas(INITIAL_DATA);
+
+  }, []);
+
+  const handleAddIdea = (data: Idea) => {
     const { title, desc } = data;
     const newIdea = {
       id: nanoid(),
@@ -44,14 +51,14 @@ function App() {
     setIdeas([...ideas, newIdea]);
   };
 
-  const handleDeleteIdea = (id) => {
-    const filteredIdeas = ideas.filter((idea) => idea.id !== id);
+  const handleDeleteIdea = (id: string) => {
+    const filteredIdeas = ideas.filter((idea: Idea) => idea.id !== id);
     setIdeas(filteredIdeas);
   };
 
   const viewIdeas = ideas.length
-    ? ideas.map((data) => (
-        <Tile key={data.id} data={data} handleDelete={handleDeleteIdea} />
+    ? ideas.map((idea: Idea) => (
+        <Tile key={idea.id} data={idea} handleDelete={handleDeleteIdea} />
       ))
     : "No ideas yet...";
 

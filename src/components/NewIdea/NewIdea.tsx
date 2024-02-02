@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./NewIdea.css";
 
 const INITIAL_FORM_DATA = {
@@ -6,7 +6,7 @@ const INITIAL_FORM_DATA = {
   desc: "",
 };
 
-const NewIdea = ({ handleSubmit }) => {
+const NewIdea = ({ handleSubmit }: {handleSubmit: Function}) => {
   const [formData, setFormData] = useState(INITIAL_FORM_DATA);
 
   return (
@@ -33,8 +33,8 @@ const NewIdea = ({ handleSubmit }) => {
           className="input-field"
           name="desc"
           id="desc"
-          cols="30"
-          rows="10"
+          cols={30}
+          rows={10}
           value={formData.desc}
           onChange={(e) => setFormData({ ...formData, desc: e.target.value })}
           placeholder="Enter your description"
