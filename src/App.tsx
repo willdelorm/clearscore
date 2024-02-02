@@ -13,21 +13,21 @@ const INITIAL_DATA: Array<Idea> = [
     title: "Idea 1",
     desc: "This is such a great idea",
     created: new Date(),
-    updated: null,
+    updated: new Date(),
   },
   {
     id: nanoid(),
     title: "Idea 2",
     desc: "This is such a terrible idea",
     created: new Date(),
-    updated: null,
+    updated: new Date(),
   },
   {
     id: nanoid(),
     title: "Idea 3",
     desc: "This idea could go places",
     created: new Date(),
-    updated: null,
+    updated: new Date(),
   },
 ];
 
@@ -45,9 +45,27 @@ function App() {
       title,
       desc,
       created: new Date(),
-      updated: null,
+      updated: new Date(),
     };
     setIdeas([...ideas, newIdea]);
+  };
+
+  const handleUpdateIdea = (
+    id: string,
+    field: keyof Idea,
+    value: string | Date
+  ) => {
+    const updatedIdeas = ideas.map((idea) => {
+      if (idea.id === id) {
+        if (field === "created" || field === "updated") {
+          idea[field] = value as Date;
+        } else {
+          idea[field] = value as string;
+        }
+      }
+      return idea;
+    });
+    setIdeas(updatedIdeas);
   };
 
   const handleDeleteIdea = (id: string) => {
@@ -57,7 +75,12 @@ function App() {
 
   const viewIdeas = ideas.length
     ? ideas.map((idea: Idea) => (
-        <Tile key={idea.id} data={idea} handleDelete={handleDeleteIdea} />
+        <Tile
+          key={idea.id}
+          data={idea}
+          handleDelete={handleDeleteIdea}
+          handleUpdate={handleUpdateIdea}
+        />
       ))
     : "No ideas yet...";
 

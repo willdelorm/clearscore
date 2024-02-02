@@ -35,3 +35,20 @@
 .fa-trash {
   color: red;
 }
+
+.edit-container {
+  display: flex;
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.edit-input {
+  flex-grow: 1;
+  padding: 12px;
+  border: 1px solid #000;
+  border-radius: 8px 0 0 8px;
+}
+
+.btn-edit {
+  border-radius: 0 8px 8px 0;
+}

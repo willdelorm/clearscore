@@ -1,5 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat");
 
+textarea {
+  resize: none;
+}
+
 #app {
   display: flex;
   flex-direction: column;

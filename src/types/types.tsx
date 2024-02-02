@@ -3,5 +3,5 @@ export interface Idea {
   title: string;
   desc: string;
   created: Date;
-  updated: Date | null;
+  updated: Date;
 }
