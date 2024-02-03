@@ -6,8 +6,13 @@ const INITIAL_FORM_DATA = {
   desc: "",
 };
 
-const NewIdea = ({ handleSubmit }: {handleSubmit: Function}) => {
+const NewIdea = ({ handleSubmit }: { handleSubmit: Function }) => {
   const [formData, setFormData] = useState(INITIAL_FORM_DATA);
+
+  const handleClick = () => {
+    handleSubmit(formData);
+    setFormData(INITIAL_FORM_DATA);
+  };
 
   return (
     <div id="new-form">
@@ -23,6 +28,7 @@ const NewIdea = ({ handleSubmit }: {handleSubmit: Function}) => {
           value={formData.title}
           onChange={(e) => setFormData({ ...formData, title: e.target.value })}
           placeholder="Enter your title"
+          autoFocus
         />
       </div>
       <div className="input-container">
@@ -34,17 +40,13 @@ const NewIdea = ({ handleSubmit }: {handleSubmit: Function}) => {
           name="desc"
           id="desc"
           cols={30}
-          rows={10}
+          rows={5}
           value={formData.desc}
           onChange={(e) => setFormData({ ...formData, desc: e.target.value })}
           placeholder="Enter your description"
         ></textarea>
       </div>
-      <button
-        id="submit"
-        className="btn"
-        onClick={() => handleSubmit(formData)}
-      >
+      <button id="submit" className="btn" onClick={handleClick}>
         Create Idea
       </button>
     </div>
