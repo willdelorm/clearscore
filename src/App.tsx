@@ -96,6 +96,9 @@ function App() {
         </div>
         <div className="list-container">{viewIdeas}</div>
       </main>
+      <footer id="footer">
+        <p>Created by Will Delorm.</p>
+      </footer>
     </div>
   );
 }
