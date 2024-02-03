@@ -11,10 +11,10 @@ When working through the task you should treat it as if you're writing real worl
 
 ### Required
 
-- Page should be fully responsive.
-- Each idea tile should contain a title and description, which is editable, as well as created/updated time.
-- New ideas should have the title field focused to prompt user to begin typing.
-- Add the ability to sort ideas by creation date or alphabetically.
+[ ] Page should be fully responsive.
+[x] Each idea tile should contain a title and description, which is editable, as well as created/updated time.
+[ ] New ideas should have the title field focused to prompt user to begin typing.
+[ ] Add the ability to sort ideas by creation date or alphabetically.
 
 ### Stretch
 
