@@ -6,6 +6,7 @@ import "./App.css";
 import Nav from "./components/Nav/Nav";
 import NewIdea from "./components/NewIdea/NewIdea";
 import Tile from "./components/Tile/Tile";
+import SortOptions from "./components/SortOptions/SortOptions";
 
 const INITIAL_DATA: Array<Idea> = [
   {
@@ -32,11 +33,7 @@ const INITIAL_DATA: Array<Idea> = [
 ];
 
 function App() {
-  const [ideas, setIdeas] = useState(Array<Idea>);
-
-  useEffect(() => {
-    setIdeas(INITIAL_DATA);
-  }, []);
+  const [ideas, setIdeas] = useState(INITIAL_DATA);
 
   const handleAddIdea = (data: Idea) => {
     const { title, desc } = data;
@@ -94,7 +91,10 @@ function App() {
         <div className="new-container">
           <NewIdea handleSubmit={handleAddIdea} />
         </div>
-        <div className="list-container">{viewIdeas}</div>
+        <div className="list-container">
+          <SortOptions />
+          {viewIdeas}
+        </div>
       </main>
       <footer id="footer">
         <p>Created by Will Delorm.</p>

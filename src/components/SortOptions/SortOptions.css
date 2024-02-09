@@ -1,0 +1,16 @@
+.sort-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  margin-bottom: 24px;
+}
+
+.sort-container span {
+  margin-right: 12px;
+}
+
+#sortSelect {
+  padding: 4px;
+  border-radius: 8px;
+}
