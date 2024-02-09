@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { nanoid } from "nanoid";
 import { Idea } from "./types/types";
 import "./App.css";
@@ -32,7 +32,7 @@ const INITIAL_DATA: Array<Idea> = [
   },
 ];
 
-function App() {
+const App = () => {
   const [ideas, setIdeas] = useState(INITIAL_DATA);
 
   const handleAddIdea = (data: Idea) => {
@@ -84,6 +84,27 @@ function App() {
       ))
     : "No ideas yet...";
 
+  const handleSortIdeas = (sortOrder: string) => {
+    const sortedIdeas = [...ideas];
+    if (sortOrder === "alphabetically") {
+      console.log("sort alpha");
+      sortedIdeas.sort((a, b) => {
+        if (a.title.toLowerCase() < b.title.toLowerCase()) return -1;
+        if (a.title.toLowerCase() > b.title.toLowerCase()) return 1;
+        return 0;
+      });
+      setIdeas(sortedIdeas);
+    } else if (sortOrder === "newest-to-oldest") {
+      console.log("sort date");
+      sortedIdeas.sort((a, b) => {
+        if (a.updated > b.updated) return -1;
+        if (a.updated < b.updated) return 1;
+        return 0;
+      });
+      setIdeas(sortedIdeas);
+    }
+  };
+
   return (
     <div id="app">
       <Nav />
@@ -92,7 +113,7 @@ function App() {
           <NewIdea handleSubmit={handleAddIdea} />
         </div>
         <div className="list-container">
-          <SortOptions />
+          <SortOptions handleSortIdeas={handleSortIdeas} />
           {viewIdeas}
         </div>
       </main>
@@ -101,6 +122,6 @@ function App() {
       </footer>
     </div>
   );
-}
+};
 
 export default App;
