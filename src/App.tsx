@@ -10,8 +10,8 @@ import Tile from "./components/Tile/Tile";
 const INITIAL_DATA: Array<Idea> = [
   {
     id: nanoid(),
-    title: "Idea 1",
-    desc: "This is such a great idea",
+    title: "Capture all of your ideas in one place",
+    desc: "Create a new idea using the New Idea field. Edit any idea by clicking on the text. Delete ideas with the red delete icon.",
     created: new Date(),
     updated: new Date(),
   },

@@ -35,3 +35,25 @@ textarea {
   font-size: 14px;
   padding: 8px 0;
 }
+
+/* landscape phones and tablets */
+@media screen and (max-width: 968px) {
+  #main {
+    flex-direction: column;
+  }
+}
+
+/* portrait phones */
+@media screen and (max-width: 576px) {
+  #app {
+    font-size: 14px;
+  }
+
+  #main {
+    flex-direction: column-reverse;
+  }
+
+  #footer {
+    font-size: 10px;
+  }
+}

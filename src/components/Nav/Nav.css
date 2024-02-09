@@ -9,3 +9,10 @@
   font-weight: 600;
   letter-spacing: 0.125rem;
 }
+
+/* portrait phones */
+@media screen and (max-width: 576px) {
+  #nav {
+    padding: 12px 18px;
+  }
+}
