@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import "./NewIdea.css";
 
 const INITIAL_FORM_DATA = {
@@ -8,10 +8,12 @@ const INITIAL_FORM_DATA = {
 
 const NewIdea = ({ handleSubmit }: { handleSubmit: Function }) => {
   const [formData, setFormData] = useState(INITIAL_FORM_DATA);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const handleClick = () => {
     handleSubmit(formData);
     setFormData(INITIAL_FORM_DATA);
+    inputRef.current?.focus();
   };
 
   return (
@@ -29,6 +31,7 @@ const NewIdea = ({ handleSubmit }: { handleSubmit: Function }) => {
           onChange={(e) => setFormData({ ...formData, title: e.target.value })}
           placeholder="Enter your title"
           autoFocus
+          ref={inputRef}
         />
       </div>
       <div className="input-container">
