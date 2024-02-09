@@ -15,9 +15,9 @@ const Tile = ({
   const [editKey, setEditKey] = useState("");
   const [editValue, setEditValue] = useState("");
 
-  const displayDate =
-    (updated > created ? "Updated on " : "Created on ") +
-    updated.toLocaleTimeString();
+  const displayDate = updated.toString().split(" ").slice(1, 5).join(" ");
+  const dateString =
+    (updated > created ? "Updated on " : "Created on ") + displayDate;
 
   const handleChange = (e: React.FormEvent<HTMLInputElement>) =>
     setEditValue(e.currentTarget.value);
@@ -81,7 +81,7 @@ const Tile = ({
         {descView}
         <p className="tile-date">
           <i className="fa-regular fa-calendar"></i>
-          {displayDate}
+          {dateString}
         </p>
       </div>
       <div className="btn-delete" onClick={() => handleDelete(id)}>
