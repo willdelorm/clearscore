@@ -45,7 +45,6 @@ const App = () => {
           updated: new Date(idea.updated),
         };
       });
-      console.log(ideasData);
       setIdeas(ideasData);
     }
   };
@@ -115,7 +114,6 @@ const App = () => {
   const handleSortIdeas = (sortOrder: string) => {
     const sortedIdeas = [...ideas];
     if (sortOrder === "alphabetically") {
-      console.log("sort alpha");
       sortedIdeas.sort((a, b) => {
         if (a.title.toLowerCase() < b.title.toLowerCase()) return -1;
         if (a.title.toLowerCase() > b.title.toLowerCase()) return 1;
@@ -123,7 +121,6 @@ const App = () => {
       });
       setIdeas(sortedIdeas);
     } else if (sortOrder === "newest-to-oldest") {
-      console.log("sort date");
       sortedIdeas.sort((a, b) => {
         if (a.updated > b.updated) return -1;
         if (a.updated < b.updated) return 1;
