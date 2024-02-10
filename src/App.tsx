@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { nanoid } from "nanoid";
 import { Idea } from "./types/types";
 import "./App.css";
@@ -35,6 +35,30 @@ const INITIAL_DATA: Array<Idea> = [
 const App = () => {
   const [ideas, setIdeas] = useState(INITIAL_DATA);
 
+  const getLocalStorage = () => {
+    const storageData = window.localStorage.getItem("ideasData");
+    if (storageData) {
+      const ideasData = JSON.parse(storageData).map((idea: Idea) => {
+        return {
+          ...idea,
+          created: new Date(idea.created),
+          updated: new Date(idea.updated),
+        };
+      });
+      console.log(ideasData);
+      setIdeas(ideasData);
+    }
+  };
+
+  const setLocalStorage = (ideasData: Array<Idea>) => {
+    const storageData = JSON.stringify(ideasData);
+    window.localStorage.setItem("ideasData", storageData);
+  };
+
+  useEffect(() => {
+    getLocalStorage();
+  }, []);
+
   const handleAddIdea = (data: Idea) => {
     const { title, desc } = data;
     const now = new Date();
@@ -46,7 +70,9 @@ const App = () => {
       created: now,
       updated: now,
     };
-    setIdeas([...ideas, newIdea]);
+    const newIdeas = [...ideas, newIdea];
+    setIdeas(newIdeas);
+    setLocalStorage(newIdeas);
   };
 
   const handleUpdateIdea = (
@@ -66,11 +92,13 @@ const App = () => {
       return idea;
     });
     setIdeas(updatedIdeas);
+    setLocalStorage(updatedIdeas);
   };
 
   const handleDeleteIdea = (id: string) => {
     const filteredIdeas = ideas.filter((idea: Idea) => idea.id !== id);
     setIdeas(filteredIdeas);
+    setLocalStorage(filteredIdeas);
   };
 
   const viewIdeas = ideas.length
@@ -102,6 +130,7 @@ const App = () => {
         return 0;
       });
       setIdeas(sortedIdeas);
+      setLocalStorage(sortedIdeas);
     }
   };
 
