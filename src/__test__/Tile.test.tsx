@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, test, vi } from "vitest";
+import { beforeEach, describe, expect, it, test, vi } from "vitest";
 import { fireEvent, render, screen } from "@testing-library/react";
 import Tile from "../components/Tile/Tile";
 import { Idea } from "../types/types";
@@ -16,11 +16,11 @@ describe("Tile tests", () => {
     render(<Tile data={data} handleDelete={vi.fn()} handleUpdate={vi.fn()} />);
   });
 
-  test("should show title", () => {
+  it("should show title", () => {
     expect(screen.getByText(/Test title/i)).toBeDefined();
   });
 
-  test("should not show editing view", () => {
+  it("should not show editing view", () => {
     expect(screen.queryByText(/Update/i)).toBeNull();
   });
 

@@ -134,7 +134,7 @@ const App = () => {
   return (
     <div id="app">
       <Nav />
-      <main id="main">
+      <main id="main" data-testid="main">
         <div className="new-container">
           <NewIdea handleSubmit={handleAddIdea} />
         </div>
