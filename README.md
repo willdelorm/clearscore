@@ -1,32 +1,129 @@
-# ClearScore FED Test
+<!-- README Template courtesy of: https://github.com/othneildrew/Best-README-Template/ -->
+<a name="readme-top"></a>
 
-Test technical assessment submission for a front end developer role at [ClearScore](https://www.clearscore.com).
-The assignment can be found here: [https://github.com/ClearScore/tech-screen/tree/master/idea-board](https://github.com/ClearScore/tech-screen/tree/master/idea-board).
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <h1 align="center">Ideas Board</h3>
 
-## Task
+  <p align="center">
+    Take-home technical assessment
+    <br />
+    <a href="https://github.com/willdelorm/assessment-clearscore"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+    <a href="https://willdelorm.github.io/assessment-clearscore/">View Demo</a>
+    ·
+    <a href="https://github.com/willdelorm/assessment-clearscore/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/willdelorm/assessment-clearscore/issues">Request Feature</a>
+  </p>
+</div>
 
-Build an idea board that allows a user to create new ideas, edit existing ideas or delete them. Each idea should be represented as a tile on the board that displays a title, description and created/updated time. The title and description should be editable inline. The description text should have a max length of 140 characters. There should also be a button on the tile that allows for it to be deleted.
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#issues">Issues</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ol>
+</details>
 
-When working through the task you should treat it as if you're writing real world production code. We're looking to see a test suite, comments where required and an attention to detail. In addition to this you may use whatever libraries or packages you wish. This should take you around two or three hours to complete fully but feel free to spend as much or as little time on the exercise as you like. Detail anything you didn't get around to completing in the `COMMENTS.md` file along with any other additonal information we should be aware of when reviewing the code.
+<!-- ABOUT THE PROJECT -->
+## About The Project
 
-### Required
+[![Product Name Screen Shot][product-screenshot]](ideas-board-screenshot.png)
 
-[x] Page should be fully responsive.
-[x] Each idea tile should contain a title and description, which is editable, as well as created/updated time.
-[x] New ideas should have the title field focused to prompt user to begin typing.
-[x] Add the ability to sort ideas by creation date or alphabetically.
+This ideas board provides a simple but effective platform to keep track of all your brightest ideas. Implemented with Vite and React, this application utilizes modern web development practices to provide users a seamless, interactive experience.
 
-### Stretch
+Assessment requirements can be found below:
 
-- Utilise the localStorage API to persist current state when the page is refreshed.
-- Add a character countdown as the user is approaching the limit of their description text.
-- Add an unobtrusive notification when an update is made to a tile.
+* [Project requirements](https://github.com/ClearScore/tech-screen/tree/master/idea-board)
+* [Additional guidelines](https://github.com/ClearScore/tech-screen#what-were-looking-for)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+### Built With
+
+* [![React][React.js]][React-url]
+* [![TypeScript][TypeScript.js]][TypeScript-url]
+* [![Vite][Vite.js]][Vite-url]
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- REQUIREMENTS -->
+## Features
+
+### Required Features
+
+* Each tile contains a title, description and created/updated times
+* Description max length of 140 characters
+* CRUD functionality
+* Editable inline
+* Delete button
+* Fully responsive
+* New ideas should have the title field focused to prompt user to begin typing.
+* Add the ability to sort ideas by creation date or alphabetically.
+
+### Stretch features
+
+* Utilise the localStorage API to persist current state when the page is refreshed.
+* Add a character countdown as the user is approaching the limit of their description text.
+* Add an unobtrusive notification when an update is made to a tile.
 
 ### Guidelines
 
-- A stylish solution
-- Clean, concise code
-- Unit Tests
-- Demonstration of CSS knowledge
-- A detailed README explaining assumptions / decisions
-- A live site we can see
+* A stylish solution
+* Clean, concise code
+* Unit Tests
+* Demonstration of CSS knowledge
+* A detailed README explaining assumptions / decisions
+* A live site we can see
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- ROADMAP -->
+## Roadmap
+
+- [ ] Description text limit of 140 characters
+- [ ] Character countdown in description text
+- [ ] Add notification to confirm update
+- [ ] Mobile view re-design
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- ISSUES -->
+## Known Issues
+
+- [ ] Missing form validation
+- [ ] Should not be able to edit more than one tile at a time
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- CONTACT -->
+## Contact
+
+Will Delorm - [@willdelorm](https://twitter.com/willdelorm) - willdelorm@gmail.com
+
+Project Link: [https://github.com/willdelorm/assessment-clearscore](https://github.com/willdelorm/assessment-clearscore)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[product-screenshot]: public/ideas-board-screenshot.png
+[React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+[React-url]: https://react.dev/
+[TypeScript.js]: https://shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=TypeScript&logoColor=FFF
+[TypeScript-url]: https://www.typescriptlang.org/
+[Vite.js]: https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white
+[Vite-url]: https://vitejs.dev/
