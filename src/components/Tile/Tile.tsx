@@ -11,13 +11,9 @@ const Tile = ({
   handleDelete: Function;
   handleUpdate: Function;
 }) => {
-  const { id, title, desc, created, updated } = data;
+  const { id, title, desc, created } = data;
   const [editKey, setEditKey] = useState("");
   const [editValue, setEditValue] = useState("");
-
-  const displayDate = updated.toString().split(" ").slice(1, 5).join(" ");
-  const dateString =
-    (updated > created ? "Updated on " : "Created on ") + displayDate;
 
   const handleChange = (e: React.FormEvent<HTMLInputElement>) =>
     setEditValue(e.currentTarget.value);
@@ -74,6 +70,9 @@ const Tile = ({
       </p>
     );
 
+  // const dateToUse = data.updated ? data.updated : created;
+  // const dateToDisplay = (data.updated ? data.updated : created).toString().split(" ").slice(1, 3).join(" ");
+
   return (
     <div className="tile-container">
       <div className="tile-text">
@@ -81,7 +80,11 @@ const Tile = ({
         {descView}
         <p className="tile-date">
           <i className="fa-regular fa-calendar"></i>
-          {dateString}
+          {(data.updated ? data.updated : created)
+            .toString()
+            .split(" ")
+            .slice(1, 3)
+            .join(" ")}
         </p>
       </div>
       <div className="btn-delete" onClick={() => handleDelete(id)}>

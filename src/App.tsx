@@ -12,7 +12,7 @@ export type Idea = {
   title: string;
   desc: string;
   created: Date;
-  updated: Date;
+  updated?: Date;
 };
 
 const App = () => {
@@ -23,11 +23,11 @@ const App = () => {
     const data = localStorage.getItem("IDEA_DATA");
     if (data !== null) {
       const storedIdeas = JSON.parse(data).map((idea: Idea) => {
-        return {
-          ...idea,
-          created: new Date(idea.created),
-          updated: new Date(idea.updated),
-        };
+        idea.created = new Date(idea.created);
+        if (idea.updated) {
+          idea.updated = new Date(idea.updated);
+        }
+        return idea;
       });
       setIdeas(storedIdeas);
     }
@@ -47,7 +47,6 @@ const App = () => {
       title,
       desc,
       created: now,
-      updated: now,
     };
     const newIdeas = [...ideas, newIdea];
     setIdeas(newIdeas);
@@ -72,8 +71,8 @@ const App = () => {
     setIdeas(updatedIdeas);
   };
 
-  const handleDeleteIdea = (id: string) => {
-    const filteredIdeas = ideas.filter((idea: Idea) => idea.id !== id);
+  const handleDeleteIdea = (idToDelete: string) => {
+    const filteredIdeas = ideas.filter((idea: Idea) => idea.id !== idToDelete);
     setIdeas(filteredIdeas);
   };
 
@@ -88,9 +87,12 @@ const App = () => {
       setIdeas(sortedIdeas);
     } else if (sortOrder === "newest-to-oldest") {
       sortedIdeas.sort((a, b) => {
-        if (a.updated > b.updated) return -1;
-        if (a.updated < b.updated) return 1;
-        return 0;
+        const aDate = a.updated ? a.updated : a.created;
+        const bDate = b.updated ? b.updated : b.created;
+        
+        if (aDate > bDate) return -1;
+        else if (aDate < bDate) return 1;
+        else return 0;
       });
       setIdeas(sortedIdeas);
     }
