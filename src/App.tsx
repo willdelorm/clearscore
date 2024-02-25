@@ -8,7 +8,7 @@ import NewIdea from "./components/NewIdea/NewIdea";
 import Tile from "./components/Tile/Tile";
 import SortOptions from "./components/SortOptions/SortOptions";
 
-const INITIAL_DATA: Array<Idea> = [
+const INITIAL_DATA: Idea[] = [
   {
     id: nanoid(),
     title: "Capture all of your ideas in one place",
@@ -33,30 +33,27 @@ const INITIAL_DATA: Array<Idea> = [
 ];
 
 const App = () => {
-  const [ideas, setIdeas] = useState(INITIAL_DATA);
-
-  const getLocalStorage = () => {
-    const storageData = window.localStorage.getItem("ideasData");
-    if (storageData) {
-      const ideasData = JSON.parse(storageData).map((idea: Idea) => {
+  const [ideas, setIdeas] = useState<Idea[]>(INITIAL_DATA);
+  
+  // Check local storage for data and loads it if it exists
+  useEffect(() => {
+    const data = localStorage.getItem("IDEA_DATA");
+    if (data !== null) {
+      const storedIdeas = JSON.parse(data).map((idea: Idea) => {
         return {
           ...idea,
           created: new Date(idea.created),
           updated: new Date(idea.updated),
         };
       });
-      setIdeas(ideasData);
+      setIdeas(storedIdeas);
     }
-  };
-
-  const setLocalStorage = (ideasData: Array<Idea>) => {
-    const storageData = JSON.stringify(ideasData);
-    window.localStorage.setItem("ideasData", storageData);
-  };
-
-  useEffect(() => {
-    getLocalStorage();
   }, []);
+
+  // Update local storage
+  useEffect(() => {
+    localStorage.setItem("IDEA_DATA", JSON.stringify(ideas));
+  }, [ideas]);
 
   const handleAddIdea = (data: Idea) => {
     const { title, desc } = data;
@@ -71,7 +68,6 @@ const App = () => {
     };
     const newIdeas = [...ideas, newIdea];
     setIdeas(newIdeas);
-    setLocalStorage(newIdeas);
   };
 
   const handleUpdateIdea = (
@@ -91,13 +87,11 @@ const App = () => {
       return idea;
     });
     setIdeas(updatedIdeas);
-    setLocalStorage(updatedIdeas);
   };
 
   const handleDeleteIdea = (id: string) => {
     const filteredIdeas = ideas.filter((idea: Idea) => idea.id !== id);
     setIdeas(filteredIdeas);
-    setLocalStorage(filteredIdeas);
   };
 
   const viewIdeas = ideas.length
@@ -127,7 +121,6 @@ const App = () => {
         return 0;
       });
       setIdeas(sortedIdeas);
-      setLocalStorage(sortedIdeas);
     }
   };
 
