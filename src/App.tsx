@@ -16,22 +16,20 @@ export type Idea = {
 };
 
 const App = () => {
-  const [ideas, setIdeas] = useState<Idea[]>([]);
-
-  // Check local storage for data and loads it if it exists
-  useEffect(() => {
+  const [ideas, setIdeas] = useState<Idea[]>((): Idea[] => {
     const data = localStorage.getItem("IDEA_DATA");
     if (data !== null) {
-      const storedIdeas = JSON.parse(data).map((idea: Idea) => {
+      return JSON.parse(data).map((idea: Idea) => {
         idea.created = new Date(idea.created);
         if (idea.updated) {
           idea.updated = new Date(idea.updated);
         }
         return idea;
       });
-      setIdeas(storedIdeas);
+    } else {
+      return [];
     }
-  }, []);
+  });
 
   // Update local storage
   useEffect(() => {
@@ -89,7 +87,7 @@ const App = () => {
       sortedIdeas.sort((a, b) => {
         const aDate = a.updated ? a.updated : a.created;
         const bDate = b.updated ? b.updated : b.created;
-        
+
         if (aDate > bDate) return -1;
         else if (aDate < bDate) return 1;
         else return 0;
