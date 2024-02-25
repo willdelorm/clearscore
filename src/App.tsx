@@ -77,17 +77,6 @@ const App = () => {
     setIdeas(filteredIdeas);
   };
 
-  const viewIdeas = ideas.length
-    ? ideas.map((idea: Idea) => (
-        <Tile
-          key={idea.id}
-          data={idea}
-          handleDelete={handleDeleteIdea}
-          handleUpdate={handleUpdateIdea}
-        />
-      ))
-    : "No ideas yet...";
-
   const handleSortIdeas = (sortOrder: string) => {
     const sortedIdeas = [...ideas];
     if (sortOrder === "alphabetically") {
@@ -116,7 +105,18 @@ const App = () => {
         </div>
         <div className="list-container">
           <SortOptions handleSortIdeas={handleSortIdeas} />
-          {viewIdeas}
+          {ideas.length ? (
+            ideas.map((idea: Idea) => (
+              <Tile
+                key={idea.id}
+                data={idea}
+                handleDelete={handleDeleteIdea}
+                handleUpdate={handleUpdateIdea}
+              />
+            ))
+          ) : (
+            <p>No ideas yet...</p>
+          )}
         </div>
       </main>
       <footer id="footer">
