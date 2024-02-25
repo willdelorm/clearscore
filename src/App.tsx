@@ -13,11 +13,11 @@ export type Idea = {
   desc: string;
   created: Date;
   updated: Date;
-}
+};
 
 const App = () => {
   const [ideas, setIdeas] = useState<Idea[]>([]);
-  
+
   // Check local storage for data and loads it if it exists
   useEffect(() => {
     const data = localStorage.getItem("IDEA_DATA");
@@ -120,7 +120,9 @@ const App = () => {
         </div>
       </main>
       <footer id="footer">
-        <p>Created by Will Delorm.</p>
+        <a href="https://github.com/willdelorm" target="_blank">
+          Created by Will Delorm.
+        </a>
       </footer>
     </div>
   );
