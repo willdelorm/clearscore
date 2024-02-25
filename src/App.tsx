@@ -1,12 +1,19 @@
 import { useEffect, useState } from "react";
 import { nanoid } from "nanoid";
-import { Idea } from "./types/types";
 import "./App.css";
 
 import Nav from "./components/Nav/Nav";
 import NewIdea from "./components/NewIdea/NewIdea";
 import Tile from "./components/Tile/Tile";
 import SortOptions from "./components/SortOptions/SortOptions";
+
+export type Idea = {
+  id: string;
+  title: string;
+  desc: string;
+  created: Date;
+  updated: Date;
+}
 
 const INITIAL_DATA: Idea[] = [
   {

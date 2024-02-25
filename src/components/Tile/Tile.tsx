@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Idea } from "../../types/types";
+import { Idea } from "../../App";
 import "./Tile.css";
 
 const Tile = ({
