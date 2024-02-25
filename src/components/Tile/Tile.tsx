@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Idea } from "../../App";
 import "./Tile.css";
 
@@ -11,76 +11,81 @@ const Tile = ({
   handleDelete: Function;
   handleUpdate: Function;
 }) => {
-  const { id, title, desc, created } = data;
-  const [editKey, setEditKey] = useState("");
-  const [editValue, setEditValue] = useState("");
-
-  const handleChange = (e: React.FormEvent<HTMLInputElement>) =>
-    setEditValue(e.currentTarget.value);
-
-  const editView = (key: string) => (
-    <div className="edit-container">
-      <input
-        className="edit-input"
-        type="text"
-        name={key}
-        id={key}
-        value={editValue}
-        onChange={handleChange}
-      />
-      <button
-        className="btn btn-edit"
-        onClick={() => {
-          handleUpdate(id, editKey, editValue);
-          setEditKey("");
-        }}
-      >
-        Update
-      </button>
-    </div>
-  );
-
-  const titleView =
-    editKey === "title" ? (
-      editView(editKey)
-    ) : (
-      <h3
-        className="tile-title"
-        onClick={() => {
-          setEditValue(title);
-          setEditKey("title");
-        }}
-      >
-        {title}
-      </h3>
-    );
-
-  const descView =
-    editKey === "desc" ? (
-      editView(editKey)
-    ) : (
-      <p
-        className="tile-desc"
-        onClick={() => {
-          setEditValue(desc);
-          setEditKey("desc");
-        }}
-      >
-        {desc}
-      </p>
-    );
-
-  // const dateToUse = data.updated ? data.updated : created;
-  // const dateToDisplay = (data.updated ? data.updated : created).toString().split(" ").slice(1, 3).join(" ");
-
+  const [tileData, setTileData] = useState(data);
+  const [editingTitle, setEditingTitle] = useState(false);
+  const [editingDescription, setEditingDescription] = useState(false);
+  
+  const { id, title, desc, created } = tileData;
+  
   return (
     <div className="tile-container">
       <div className="tile-text">
-        {titleView}
-        {descView}
+        {!editingTitle ? (
+          <h3
+            className="tile-title"
+            onClick={() => {
+              setEditingTitle(true);
+            }}
+          >
+            {title}
+          </h3>
+        ) : (
+          <div className="edit-container">
+            <input
+              className="edit-input"
+              type="text"
+              name="title"
+              id="title"
+              value={title}
+              onChange={(e) =>
+                setTileData({ ...tileData, title: e.currentTarget.value })
+              }
+            />
+            <button
+              className="btn btn-edit"
+              onClick={() => {
+                handleUpdate(id, "title", title);
+                setEditingTitle(false);
+              }}
+            >
+              Update
+            </button>
+          </div>
+        )}
+        {!editingDescription ? (
+          <h3
+            className="tile-desc"
+            onClick={() => {
+              setEditingDescription(true);
+            }}
+          >
+            {desc}
+          </h3>
+        ) : (
+          <div className="edit-container">
+            <textarea
+              className="edit-input"
+              name="desc"
+              id="desc"
+              value={desc}
+              onChange={(e) =>
+                setTileData({ ...tileData, desc: e.currentTarget.value })
+              }
+            />
+            <button
+              className="btn btn-edit"
+              onClick={() => {
+                handleUpdate(id, "desc", desc);
+                setEditingDescription(false);
+              }}
+            >
+              Update
+            </button>
+          </div>
+        )}
         <p className="tile-date">
           <i className="fa-regular fa-calendar"></i>
-          {(data.updated ? data.updated : created)
+          {(tileData.updated ? tileData.updated : created)
             .toString()
             .split(" ")
             .slice(1, 3)
