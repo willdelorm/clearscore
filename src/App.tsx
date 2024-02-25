@@ -15,32 +15,8 @@ export type Idea = {
   updated: Date;
 }
 
-const INITIAL_DATA: Idea[] = [
-  {
-    id: nanoid(),
-    title: "Capture all of your ideas in one place",
-    desc: "Create a new idea using the New Idea field. Edit any idea by clicking on the text. Delete ideas with the red delete icon.",
-    created: new Date("2024-01-13"),
-    updated: new Date("2024-01-13"),
-  },
-  {
-    id: nanoid(),
-    title: "Organize your ideas",
-    desc: "Use the dropdown to organize your ideas by most-recently updated or alphabetically.",
-    created: new Date("2023-08-24"),
-    updated: new Date("2023-08-24"),
-  },
-  {
-    id: nanoid(),
-    title: "Get your ideas flowing now",
-    desc: "Clear out these example ideas and start creating your own!",
-    created: new Date("2023-06-02"),
-    updated: new Date("2023-06-02"),
-  },
-];
-
 const App = () => {
-  const [ideas, setIdeas] = useState<Idea[]>(INITIAL_DATA);
+  const [ideas, setIdeas] = useState<Idea[]>([]);
   
   // Check local storage for data and loads it if it exists
   useEffect(() => {
