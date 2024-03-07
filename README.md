@@ -93,6 +93,9 @@ Assessment requirements can be found below:
 <!-- ROADMAP -->
 ## Roadmap
 
+- [ ] Incorporate Date library to handle timestamps
+- [ ] Implement data validation for form
+- [ ] Improve testing suite
 - [ ] Description text limit of 140 characters
 - [ ] Character countdown in description text
 - [ ] Add notification to confirm update
@@ -103,7 +106,6 @@ Assessment requirements can be found below:
 <!-- ISSUES -->
 ## Known Issues
 
-- [ ] Missing form validation
 - [ ] Should not be able to edit more than one tile at a time
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
