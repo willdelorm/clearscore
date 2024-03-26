@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import "./NewIdea.css";
 
-const INITIAL_FORM_DATA = {
+export const INITIAL_FORM_DATA = {
   title: "",
   desc: "",
 };
