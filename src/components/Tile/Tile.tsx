@@ -14,9 +14,20 @@ const Tile = ({
   const [tileData, setTileData] = useState(data);
   const [editingTitle, setEditingTitle] = useState(false);
   const [editingDescription, setEditingDescription] = useState(false);
-  
+
   const { id, title, desc, created } = tileData;
-  
+
+  const formatDate = (): string => {
+    const date = tileData.updated ? tileData.updated : created;
+    const formatter = new Intl.DateTimeFormat("en-US", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    });
+    const formattedDate = formatter.format(date);
+    return formattedDate;
+  };
+
   return (
     <div className="tile-container">
       <div className="tile-text">
@@ -85,11 +96,7 @@ const Tile = ({
         )}
         <p className="tile-date">
           <i className="fa-regular fa-calendar"></i>
-          {(tileData.updated ? tileData.updated : created)
-            .toString()
-            .split(" ")
-            .slice(1, 3)
-            .join(" ")}
+          {formatDate()}
         </p>
       </div>
       <div className="btn-delete" onClick={() => handleDelete(id)}>

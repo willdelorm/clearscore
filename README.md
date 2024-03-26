@@ -93,7 +93,7 @@ Assessment requirements can be found below:
 <!-- ROADMAP -->
 ## Roadmap
 
-- [ ] Incorporate Date library to handle timestamps
+- [x] Format date output cleaner
 - [ ] Implement data validation for form
 - [ ] Improve testing suite
 - [ ] Description text limit of 140 characters
