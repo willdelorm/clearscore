@@ -1,23 +1,30 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
 import "./NewIdea.css";
 
-const INITIAL_FORM_DATA = {
-  title: "",
-  desc: "",
+export type Inputs = {
+  title: string;
+  desc: string;
 };
 
-const NewIdea = ({ handleSubmit }: { handleSubmit: Function }) => {
-  const [formData, setFormData] = useState(INITIAL_FORM_DATA);
+const NewIdea = ({ handleAddIdea }: { handleAddIdea: Function }) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const handleClick = () => {
-    handleSubmit(formData);
-    setFormData(INITIAL_FORM_DATA);
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<Inputs>();
+
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    handleAddIdea(data);
+    reset();
     inputRef.current?.focus();
   };
 
   return (
-    <div id="new-form">
+    <form id="new-form" onSubmit={handleSubmit(onSubmit)}>
       <div className="input-container">
         <label className="input-label" htmlFor="title">
           Title
@@ -25,14 +32,15 @@ const NewIdea = ({ handleSubmit }: { handleSubmit: Function }) => {
         <input
           className="input-field"
           type="text"
-          name="title"
           id="title-text"
-          value={formData.title}
-          onChange={(e) => setFormData({ ...formData, title: e.target.value })}
           placeholder="Enter your title"
           autoFocus
-          ref={inputRef}
+          {...register("title", {
+            required: { value: true, message: "required" },
+            maxLength: { value: 40, message: "40 characters max" },
+          })}
         />
+        {errors.title && <span className="form-error">{errors.title?.message}</span>}
       </div>
       <div className="input-container">
         <label className="input-label" htmlFor="desc">
@@ -40,19 +48,21 @@ const NewIdea = ({ handleSubmit }: { handleSubmit: Function }) => {
         </label>
         <textarea
           className="input-field"
-          name="desc"
           id="desc"
           cols={30}
           rows={5}
-          value={formData.desc}
-          onChange={(e) => setFormData({ ...formData, desc: e.target.value })}
           placeholder="Enter your description"
+          {...register("desc", {
+            required: { value: true, message: "required" },
+            maxLength: { value: 140, message: "140 characters max" },
+          })}
         ></textarea>
+        {errors.desc && <span className="form-error">{errors.desc?.message}</span>}
       </div>
-      <button id="submit" className="btn" onClick={handleClick}>
+      <button id="submit" className="btn">
         Create Idea
       </button>
-    </div>
+    </form>
   );
 };
 

@@ -1,20 +1,32 @@
 import { useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { Idea } from "../../App";
+import { Inputs } from "../NewIdea/NewIdea";
 import "./Tile.css";
 
 const Tile = ({
-  data,
+  tileData,
   handleDelete,
   handleUpdate,
 }: {
-  data: Idea;
+  tileData: Idea;
   handleDelete: Function;
   handleUpdate: Function;
 }) => {
-  const [tileData, setTileData] = useState(data);
   const [isEditing, setIsEditing] = useState(false);
 
   const { id, title, desc, created } = tileData;
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Inputs>();
+
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    handleUpdate(id, data.title, data.desc);
+    setIsEditing(false);
+  };
 
   const formatDate = (): string => {
     const date = tileData.updated ? tileData.updated : created;
@@ -38,41 +50,41 @@ const Tile = ({
           <i className="fa-solid fa-trash"></i>
         </div>
       </header>
-      <div className="tile-form">
+      <form className="tile-form" onSubmit={handleSubmit(onSubmit)}>
         <input
           className="tile-input title"
           type="text"
-          name="title"
           id="title"
-          value={title}
-          onChange={(e) => {
-            setTileData({ ...tileData, title: e.currentTarget.value });
+          defaultValue={title}
+          {...register("title", {
+            required: { value: true, message: "required" },
+            maxLength: { value: 40, message: "40 characters max" },
+          })}
+          onChange={() => {
             setIsEditing(true);
           }}
         />
+        {errors.title && <span className="form-error">{errors.title?.message}</span>}
         <textarea
           className="tile-input"
-          name="desc"
           id="desc"
-          value={desc}
+          defaultValue={desc}
           rows={3}
-          onChange={(e) => {
-            setTileData({ ...tileData, desc: e.currentTarget.value });
+          {...register("desc", {
+            required: { value: true, message: "required" },
+            maxLength: { value: 140, message: "140 characters max" },
+          })}
+          onChange={() => {
             setIsEditing(true);
           }}
         />
-      </div>
+        {errors.desc && <span className="form-error">{errors.desc?.message}</span>}
       {isEditing && (
-        <button
-          className="btn btn-edit"
-          onClick={() => {
-            handleUpdate(id, tileData.title, tileData.desc);
-            setIsEditing(false);
-          }}
-        >
+        <button className="btn btn-edit">
           Update
         </button>
       )}
+      </form>
     </div>
   );
 };
