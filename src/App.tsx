@@ -101,7 +101,7 @@ const App = () => {
       <Nav />
       <main id="main" data-testid="main">
         <div className="new-container">
-          <NewIdea handleSubmit={handleAddIdea} />
+          <NewIdea handleAddIdea={handleAddIdea} />
         </div>
         <div className="list-container">
           <SortOptions handleSortIdeas={handleSortIdeas} />
