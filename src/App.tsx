@@ -52,16 +52,13 @@ const App = () => {
 
   const handleUpdateIdea = (
     id: string,
-    field: keyof Idea,
-    value: string | Date
+    title: string,
+    desc: string,
+    
   ) => {
     const updatedIdeas = ideas.map((idea) => {
       if (idea.id === id) {
-        if (field === "created" || field === "updated") {
-          idea[field] = value as Date;
-        } else {
-          idea[field] = value as string;
-        }
+        idea = {...idea, title, desc}
         idea.updated = new Date();
       }
       return idea;
