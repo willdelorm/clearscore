@@ -12,8 +12,7 @@ const Tile = ({
   handleUpdate: Function;
 }) => {
   const [tileData, setTileData] = useState(data);
-  const [editingTitle, setEditingTitle] = useState(false);
-  const [editingDescription, setEditingDescription] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
 
   const { id, title, desc, created } = tileData;
 
@@ -30,78 +29,50 @@ const Tile = ({
 
   return (
     <div className="tile-container">
-      <div className="tile-text">
-        {!editingTitle ? (
-          <h3
-            className="tile-title"
-            onClick={() => {
-              setEditingTitle(true);
-            }}
-          >
-            {title}
-          </h3>
-        ) : (
-          <div className="edit-container">
-            <input
-              className="edit-input"
-              type="text"
-              name="title"
-              id="title"
-              value={title}
-              onChange={(e) =>
-                setTileData({ ...tileData, title: e.currentTarget.value })
-              }
-            />
-            <button
-              className="btn btn-edit"
-              onClick={() => {
-                handleUpdate(id, "title", title);
-                setEditingTitle(false);
-              }}
-            >
-              Update
-            </button>
-          </div>
-        )}
-        {!editingDescription ? (
-          <h3
-            className="tile-desc"
-            onClick={() => {
-              setEditingDescription(true);
-            }}
-          >
-            {desc}
-          </h3>
-        ) : (
-          <div className="edit-container">
-            <textarea
-              className="edit-input"
-              name="desc"
-              id="desc"
-              value={desc}
-              onChange={(e) =>
-                setTileData({ ...tileData, desc: e.currentTarget.value })
-              }
-            />
-            <button
-              className="btn btn-edit"
-              onClick={() => {
-                handleUpdate(id, "desc", desc);
-                setEditingDescription(false);
-              }}
-            >
-              Update
-            </button>
-          </div>
-        )}
+      <header className="tile-header">
         <p className="tile-date">
           <i className="fa-regular fa-calendar"></i>
           {formatDate()}
         </p>
+        <div className="btn-delete" onClick={() => handleDelete(id)}>
+          <i className="fa-solid fa-trash"></i>
+        </div>
+      </header>
+      <div className="tile-form">
+        <input
+          className="tile-input title"
+          type="text"
+          name="title"
+          id="title"
+          value={title}
+          onChange={(e) => {
+            setTileData({ ...tileData, title: e.currentTarget.value });
+            setIsEditing(true);
+          }}
+        />
+        <textarea
+          className="tile-input"
+          name="desc"
+          id="desc"
+          value={desc}
+          rows={3}
+          onChange={(e) => {
+            setTileData({ ...tileData, desc: e.currentTarget.value });
+            setIsEditing(true);
+          }}
+        />
       </div>
-      <div className="btn-delete" onClick={() => handleDelete(id)}>
-        <i className="fa-solid fa-trash"></i>
-      </div>
+      {isEditing && (
+        <button
+          className="btn btn-edit"
+          onClick={() => {
+            handleUpdate(id, tileData.title, tileData.desc);
+            setIsEditing(false);
+          }}
+        >
+          Update
+        </button>
+      )}
     </div>
   );
 };
