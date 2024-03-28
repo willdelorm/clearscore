@@ -94,7 +94,7 @@ Assessment requirements can be found below:
 ## Roadmap
 
 - [x] Format date output cleaner
-- [ ] Implement data validation for form
+- [x] Implement data validation for form
 - [ ] Improve testing suite
 - [ ] Description text limit of 140 characters
 - [ ] Character countdown in description text
