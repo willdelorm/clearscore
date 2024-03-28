@@ -13,7 +13,7 @@ const data: Idea = {
 
 describe("Tile tests", () => {
   beforeEach(() => {
-    render(<Tile data={data} handleDelete={vi.fn()} handleUpdate={vi.fn()} />);
+    render(<Tile tileData={data} handleDelete={vi.fn()} handleUpdate={vi.fn()} />);
   });
 
   it("should show title", () => {
