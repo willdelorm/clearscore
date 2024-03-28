@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import "./NewIdea.css";
 
-type Inputs = {
+export type Inputs = {
   title: string;
   desc: string;
 };
@@ -27,7 +27,7 @@ const NewIdea = ({ handleAddIdea }: { handleAddIdea: Function }) => {
     <form id="new-form" onSubmit={handleSubmit(onSubmit)}>
       <div className="input-container">
         <label className="input-label" htmlFor="title">
-          Title {errors.title && <span>{errors.title?.message}</span>}
+          Title
         </label>
         <input
           className="input-field"
@@ -40,10 +40,11 @@ const NewIdea = ({ handleAddIdea }: { handleAddIdea: Function }) => {
             maxLength: { value: 40, message: "40 characters max" },
           })}
         />
+        {errors.title && <span className="form-error">{errors.title?.message}</span>}
       </div>
       <div className="input-container">
         <label className="input-label" htmlFor="desc">
-          Description {errors.desc && <span>{errors.desc?.message}</span>}
+          Description
         </label>
         <textarea
           className="input-field"
@@ -56,6 +57,7 @@ const NewIdea = ({ handleAddIdea }: { handleAddIdea: Function }) => {
             maxLength: { value: 140, message: "140 characters max" },
           })}
         ></textarea>
+        {errors.desc && <span className="form-error">{errors.desc?.message}</span>}
       </div>
       <button id="submit" className="btn">
         Create Idea

@@ -106,7 +106,7 @@ const App = () => {
             ideas.map((idea: Idea) => (
               <Tile
                 key={idea.id}
-                data={idea}
+                tileData={idea}
                 handleDelete={handleDeleteIdea}
                 handleUpdate={handleUpdateIdea}
               />
