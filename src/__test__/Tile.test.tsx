@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, test, vi } from "vitest";
 import { fireEvent, render, screen } from "@testing-library/react";
 import Tile from "../components/Tile/Tile";
-import { Idea } from "../types/types";
+import { Idea } from "../App";
 
 const data: Idea = {
   id: "1",
