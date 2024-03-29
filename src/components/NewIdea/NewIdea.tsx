@@ -33,6 +33,7 @@ const NewIdea = ({ handleAddIdea }: { handleAddIdea: Function }) => {
           className="input-field"
           type="text"
           id="title-text"
+          maxLength={40}
           placeholder="Enter your title"
           autoFocus
           {...register("title", {
@@ -51,6 +52,7 @@ const NewIdea = ({ handleAddIdea }: { handleAddIdea: Function }) => {
           id="desc"
           cols={30}
           rows={5}
+          maxLength={140}
           placeholder="Enter your description"
           {...register("desc", {
             required: { value: true, message: "required" },

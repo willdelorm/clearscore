@@ -56,6 +56,7 @@ const Tile = ({
           type="text"
           id="title"
           defaultValue={title}
+          maxLength={40}
           {...register("title", {
             required: { value: true, message: "required" },
             maxLength: { value: 40, message: "40 characters max" },
@@ -69,6 +70,7 @@ const Tile = ({
           className="tile-input"
           id="desc"
           defaultValue={desc}
+          maxLength={140}
           rows={3}
           {...register("desc", {
             required: { value: true, message: "required" },
