@@ -10,6 +10,7 @@
   display: flex;
   flex-direction: column;
   margin-bottom: 16px;
+  position: relative;
 }
 
 .input-label {
@@ -20,12 +21,21 @@
   padding: 12px;
   border: 1px solid #000;
   border-radius: 8px;
+  z-index: 100;
+  background: none;
 }
 
 .form-error {
   color: red;
   font-size: 12px;
   font-weight: 600;
+}
+
+.character-countdown {
+  position: absolute;
+  bottom: 4px;
+  right: 8px;
+  
 }
 
 .btn {

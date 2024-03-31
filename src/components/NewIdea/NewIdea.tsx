@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import "./NewIdea.css";
 
@@ -7,21 +7,35 @@ export type Inputs = {
   desc: string;
 };
 
+const TITLE_MAX_LENGTH = 40;
+const DESC_MAX_LENGTH = 140;
+
 const NewIdea = ({ handleAddIdea }: { handleAddIdea: Function }) => {
+  const [descLength, setDescLength] = useState<number>(DESC_MAX_LENGTH);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const {
-    register,
     handleSubmit,
+    register,
     reset,
+    watch,
     formState: { errors },
   } = useForm<Inputs>();
+  const watchDesc = watch("desc");
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     handleAddIdea(data);
     reset();
     inputRef.current?.focus();
   };
+
+  useEffect(() => {
+    if (!watchDesc) {
+      setDescLength(DESC_MAX_LENGTH);
+    } else {
+      setDescLength(DESC_MAX_LENGTH - watchDesc.length);
+    }
+  }, [watchDesc]);
 
   return (
     <form id="new-form" onSubmit={handleSubmit(onSubmit)}>
@@ -33,12 +47,12 @@ const NewIdea = ({ handleAddIdea }: { handleAddIdea: Function }) => {
           className="input-field"
           type="text"
           id="title-text"
-          maxLength={40}
+          maxLength={TITLE_MAX_LENGTH}
           placeholder="Enter your title"
           autoFocus
           {...register("title", {
             required: { value: true, message: "required" },
-            maxLength: { value: 40, message: "40 characters max" },
+            maxLength: { value: TITLE_MAX_LENGTH, message: `${TITLE_MAX_LENGTH} characters max` },
           })}
         />
         {errors.title && <span className="form-error">{errors.title?.message}</span>}
@@ -52,14 +66,15 @@ const NewIdea = ({ handleAddIdea }: { handleAddIdea: Function }) => {
           id="desc"
           cols={30}
           rows={5}
-          maxLength={140}
+          maxLength={DESC_MAX_LENGTH}
           placeholder="Enter your description"
           {...register("desc", {
             required: { value: true, message: "required" },
-            maxLength: { value: 140, message: "140 characters max" },
+            maxLength: { value: DESC_MAX_LENGTH, message: `${DESC_MAX_LENGTH} characters max` },
           })}
         ></textarea>
         {errors.desc && <span className="form-error">{errors.desc?.message}</span>}
+        <span className="character-countdown" aria-disabled>{descLength}</span>
       </div>
       <button id="submit" className="btn">
         Create Idea

@@ -96,8 +96,8 @@ Assessment requirements can be found below:
 - [x] Format date output cleaner
 - [x] Implement data validation for form
 - [ ] Improve testing suite
-- [ ] Description text limit of 140 characters
-- [ ] Character countdown in description text
+- [x] Description text limit of 140 characters
+- [x] Character countdown in description text
 - [ ] Add notification to confirm update
 - [ ] Mobile view re-design
 
