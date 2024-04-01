@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import "./SortOptions.css";
 
 const SortOptions = ({ handleSortIdeas }: { handleSortIdeas: Function }) => {

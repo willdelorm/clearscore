@@ -1,11 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import "./NewIdea.css";
 
-export type Inputs = {
-  title: string;
-  desc: string;
-};
+import { Inputs } from "../../utils/types";
+
+import "./NewIdea.css";
 
 const TITLE_MAX_LENGTH = 40;
 const DESC_MAX_LENGTH = 140;
@@ -73,7 +71,6 @@ const NewIdea = ({ handleAddIdea }: { handleAddIdea: Function }) => {
             maxLength: { value: DESC_MAX_LENGTH, message: `${DESC_MAX_LENGTH} characters max` },
           })}
         ></textarea>
-        
         <span className="character-countdown" aria-disabled>{descLength}</span>
       </div>
       <button id="submit" className="btn">

@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { Idea } from "../../App";
-import { Inputs } from "../NewIdea/NewIdea";
+
+import { Idea, Inputs } from "../../utils/types";
+
 import "./Tile.css";
 
 const Tile = ({
@@ -14,7 +15,6 @@ const Tile = ({
   handleUpdate: Function;
 }) => {
   const [isEditing, setIsEditing] = useState(false);
-
   const { id, title, desc, created } = tileData;
 
   const {

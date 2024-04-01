@@ -1,22 +1,17 @@
 import { useEffect, useState } from "react";
 import { nanoid } from "nanoid";
-import "./App.css";
 
 import Nav from "./components/Nav/Nav";
 import NewIdea from "./components/NewIdea/NewIdea";
 import Tile from "./components/Tile/Tile";
 import SortOptions from "./components/SortOptions/SortOptions";
+import {Idea} from "./utils/types"
 
-export type Idea = {
-  id: string;
-  title: string;
-  desc: string;
-  created: Date;
-  updated?: Date;
-};
+import "./App.css";
 
 const App = () => {
-  const [ideas, setIdeas] = useState<Idea[]>((): Idea[] => {
+  // Check localStorage on load for existing data
+  const [ideas, setIdeas] = useState<Idea[]>(() => {
     const data = localStorage.getItem("IDEA_DATA");
     if (data !== null) {
       return JSON.parse(data).map((idea: Idea) => {
@@ -26,18 +21,17 @@ const App = () => {
         }
         return idea;
       });
-    } else {
-      return [];
     }
+    return [];
   });
 
-  // Update local storage
+  // Update localStorage
   useEffect(() => {
     localStorage.setItem("IDEA_DATA", JSON.stringify(ideas));
   }, [ideas]);
 
-  const handleAddIdea = (data: Idea) => {
-    const { title, desc } = data;
+  const handleAddIdea = (idea: Idea) => {
+    const { title, desc } = idea;
     const now = new Date();
 
     const newIdea = {
@@ -46,7 +40,7 @@ const App = () => {
       desc,
       created: now,
     };
-    const newIdeas = [...ideas, newIdea];
+    const newIdeas = [newIdea, ...ideas];
     setIdeas(newIdeas);
   };
 
@@ -66,8 +60,8 @@ const App = () => {
     setIdeas(updatedIdeas);
   };
 
-  const handleDeleteIdea = (idToDelete: string) => {
-    const filteredIdeas = ideas.filter((idea: Idea) => idea.id !== idToDelete);
+  const handleDeleteIdea = (id: string) => {
+    const filteredIdeas = ideas.filter((idea: Idea) => idea.id !== id);
     setIdeas(filteredIdeas);
   };
 
@@ -118,10 +112,10 @@ const App = () => {
     <div id="app">
       <Nav />
       <main id="main" data-testid="main">
-        <div className="new-container">
+        <section className="new-container">
           <NewIdea handleAddIdea={handleAddIdea} />
-        </div>
-        <div className="list-container">
+        </section>
+        <section className="list-container">
           <SortOptions handleSortIdeas={handleSortIdeas} />
           {ideas.length ? (
             ideas.map((idea: Idea) => (
@@ -137,7 +131,7 @@ const App = () => {
               <p>Ready for a brilliant idea!</p>
             </div>
           )}
-        </div>
+        </section>
       </main>
       <footer id="footer">
         <a href="https://github.com/willdelorm" target="_blank">

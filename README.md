@@ -100,6 +100,7 @@ Assessment requirements can be found below:
 - [x] Character countdown in description text
 - [ ] Add notification to confirm update
 - [ ] Mobile view re-design
+- [ ] Convert date properties to strings
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
