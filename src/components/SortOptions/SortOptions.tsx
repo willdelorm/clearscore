@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./SortOptions.css";
 
 const SortOptions = ({ handleSortIdeas }: { handleSortIdeas: Function }) => {
-  const [sortOrder, setSortOrder] = useState("newest-to-oldest");
+  const [sortOrder, setSortOrder] = useState("new-to-old");
 
   const handleChange = (e: React.FormEvent<HTMLSelectElement>) => {
     const newSortOrder = e.currentTarget.value;
@@ -19,8 +19,10 @@ const SortOptions = ({ handleSortIdeas }: { handleSortIdeas: Function }) => {
         value={sortOrder}
         onChange={handleChange}
       >
-        <option value="newest-to-oldest">Newest to oldest</option>
-        <option value="alphabetically">Alphabetically</option>
+        <option value="old-to-new">Oldest to newest</option>
+        <option value="new-to-old">Newest to oldest</option>
+        <option value="a-z">A - Z</option>
+        <option value="z-a">Z - A</option>
       </select>
     </div>
   );

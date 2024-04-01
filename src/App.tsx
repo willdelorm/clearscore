@@ -73,24 +73,45 @@ const App = () => {
 
   const handleSortIdeas = (sortOrder: string) => {
     const sortedIdeas = [...ideas];
-    if (sortOrder === "alphabetically") {
-      sortedIdeas.sort((a, b) => {
-        if (a.title.toLowerCase() < b.title.toLowerCase()) return -1;
-        if (a.title.toLowerCase() > b.title.toLowerCase()) return 1;
-        return 0;
-      });
-      setIdeas(sortedIdeas);
-    } else if (sortOrder === "newest-to-oldest") {
-      sortedIdeas.sort((a, b) => {
-        const aDate = a.updated ? a.updated : a.created;
-        const bDate = b.updated ? b.updated : b.created;
-
-        if (aDate > bDate) return -1;
-        else if (aDate < bDate) return 1;
-        else return 0;
-      });
-      setIdeas(sortedIdeas);
+    switch (sortOrder) {
+      case "new-to-old":
+        sortedIdeas.sort((a, b) => {
+          const aDate = a.updated ? a.updated : a.created;
+          const bDate = b.updated ? b.updated : b.created;
+  
+          if (aDate > bDate) return -1;
+          else if (aDate < bDate) return 1;
+          else return 0;
+        });
+        break;
+      case "old-to-new":
+        sortedIdeas.sort((a, b) => {
+          const aDate = a.updated ? a.updated : a.created;
+          const bDate = b.updated ? b.updated : b.created;
+  
+          if (aDate > bDate) return 1;
+          else if (aDate < bDate) return -1;
+          else return 0;
+        });
+        break;
+      case "a-z":
+        sortedIdeas.sort((a, b) => {
+          if (a.title.toLowerCase() < b.title.toLowerCase()) return -1;
+          if (a.title.toLowerCase() > b.title.toLowerCase()) return 1;
+          return 0;
+        });
+        break;
+      case "z-a":
+        sortedIdeas.sort((a, b) => {
+          if (a.title.toLowerCase() < b.title.toLowerCase()) return 1;
+          if (a.title.toLowerCase() > b.title.toLowerCase()) return -1;
+          return 0;
+        });
+        break;
+      default:
+        sortedIdeas.sort();
     }
+    setIdeas(sortedIdeas);
   };
 
   return (
