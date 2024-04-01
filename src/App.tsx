@@ -112,7 +112,9 @@ const App = () => {
               />
             ))
           ) : (
-            <p>No ideas yet...</p>
+            <div className="empty-container">
+              <p>Ready for a brilliant idea!</p>
+            </div>
           )}
         </div>
       </main>

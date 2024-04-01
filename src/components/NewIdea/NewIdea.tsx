@@ -41,7 +41,7 @@ const NewIdea = ({ handleAddIdea }: { handleAddIdea: Function }) => {
     <form id="new-form" onSubmit={handleSubmit(onSubmit)}>
       <div className="input-container">
         <label className="input-label" htmlFor="title">
-          Title
+          Title {errors.title && <span className="form-error">{errors.title?.message}</span>}
         </label>
         <input
           className="input-field"
@@ -55,11 +55,11 @@ const NewIdea = ({ handleAddIdea }: { handleAddIdea: Function }) => {
             maxLength: { value: TITLE_MAX_LENGTH, message: `${TITLE_MAX_LENGTH} characters max` },
           })}
         />
-        {errors.title && <span className="form-error">{errors.title?.message}</span>}
+        
       </div>
       <div className="input-container">
         <label className="input-label" htmlFor="desc">
-          Description
+          Description {errors.desc && <span className="form-error">{errors.desc?.message}</span>}
         </label>
         <textarea
           className="input-field"
@@ -73,7 +73,7 @@ const NewIdea = ({ handleAddIdea }: { handleAddIdea: Function }) => {
             maxLength: { value: DESC_MAX_LENGTH, message: `${DESC_MAX_LENGTH} characters max` },
           })}
         ></textarea>
-        {errors.desc && <span className="form-error">{errors.desc?.message}</span>}
+        
         <span className="character-countdown" aria-disabled>{descLength}</span>
       </div>
       <button id="submit" className="btn">

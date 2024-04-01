@@ -28,6 +28,16 @@ textarea {
   padding: 24px;
 }
 
+.empty-container {
+  height: 75%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 32px;
+  font-style: italic;
+  text-align: center;
+}
+
 #footer {
   display: flex;
   justify-content: center;
